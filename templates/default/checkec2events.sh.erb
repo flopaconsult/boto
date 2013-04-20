@@ -1,0 +1,11 @@
+AWS_ACCESS_KEY_ID=<%= @aws_key_id %>;export AWS_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY=<%= @aws_secret_key %>;export AWS_SECRET_ACCESS_KEY
+lines=`instance_events -H ID,Code,NotBefore,NotAfter,T:hostname -S NotBefore | wc -l`
+
+if [ "${lines}" '>' "2" ] ; then
+        echo Problem, please check EC2 Events
+        exit 2
+else
+        echo ok
+        exit 0
+fi
